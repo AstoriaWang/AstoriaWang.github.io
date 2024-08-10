@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beijing School Map</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="shortcut icon" href="img/4043250_avatar_child_girl_kid_icon.ico" type="image/x-icon">
+    <!-- Fonts -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inconsolata" />
+    <link href="https://fonts.googleapis.com/css?family=Catamaran&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Mukta:300,400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,500,600,700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+    <script src="https://unpkg.com/papaparse@5.3.0/papaparse.min.js"></script>
+    <script src="https://unpkg.com/chroma-js@2.1.0/chroma.min.js"></script>
+    <style>
+        body {
+            font-family: 'Lora', serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+            overflow-x: hidden;
+            overflow-y: hidden;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+        }
+
+        .section-title {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .storytelling {
+            margin-top: 40px;
+        }
+
+        .icon {
+            font-size: 2rem;
+            color: #007bff;
+        }
+
+        .image-placeholder {
+            height: 200px;
+            background-color: #ddd;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+
+        .footer {
+            /* background-color: #fff; */
+            color: #343a40;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            margin-left: 20%;
+            margin-right: 20%;
+            /* background-color: #f8f9fa; */
+            color: #343a40;
+            text-align: center;
+        }
+
+        #map {
+            height: calc(100vh - 56px - 150px);
+        }
+
+        .legend {
+            background: white;
+            font-family: 'Lora', serif;
+            opacity: 0.8;
+            padding: 10px;
+            line-height: 1.5;
+            font-size: 14px;
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            min-width: 350px;
+        }
+
+        .legend i {
+            width: 18px;
+            height: 18px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 5px;
+        }
+
+        .title-container {
+            margin-bottom: 10px;
+        }
+
+        .title-container h3 {
+            margin: 0;
+        }
+
+        .title-container p {
+            margin: 0;
+            font-size: 14px;
+            color: #666;
+        }
+
+        .leaflet-top.leaflet-left .leaflet-control {
+            margin-top: 35px;
+            /* Adjust this value to move the zoom control down */
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R84F1GN2FV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-R84F1GN2FV');
+    </script>
+</head>
+
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <a class="navbar-brand" href="index.html"><img src="img/4043250_avatar_child_girl_kid_icon.png" alt="Logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="perception.html">Public Perception</a></li>
+                <li class="nav-item"><a class="nav-link active" href="map.html">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="survey.html">Survey</a></li>
+                <li class="nav-item"><a class="nav-link" href="pedagogy.html">Pedagogy</a></li>
+                <li class="nav-item"><a class="nav-link" href="test.html">Test</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div id="map"></div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Astoria "Muhan" Wang. All rights reserved.</p>
+        <p><strong>Acknowledgment: </strong>Most of the images used in this application have been sourced from the
+            internet. We sincerely thank the online
+            community for their contributions and support. Additionally, many photos have been taken from
+            schools in Beijing
+            that accept migrant children, collected during my time as a volunteer. Your cooperation and support
+            are greatly
+            appreciated.</p>
+        <a href="https://www.bcis.cn/" target="_blank"><img width="180px" src="img/lecheng.png"
+                style="max-width:20%;"></a>
+    </footer>
+
+    <script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([39.9342, 116.4074], 12); // Centered at Beijing
+
+        L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}@2x.png', {
+            maxZoom: 18,
+        }).addTo(map);
+
+        var colors = chroma.scale('YlOrRd').domain([5, 1]); // Reverse YlOrRd color scale
+
+        var labels = {
+            1: 'Municipal Key School',
+            2: 'District Key School',
+            3: 'General School',
+            4: 'Developing School',
+            5: 'Progressing School'
+        };
+
+        Papa.parse('data/schools.csv', {
+            download: true,
+            header: true,
+            complete: function (results) {
+                var schools = results.data;
+
+                schools.forEach(function (school) {
+                    var lat = parseFloat(school.Latitude);
+                    var lng = parseFloat(school.Longitude);
+                    var level = parseInt(school['级别']);
+                    var name = school['学  校  名  称'];
+                    var district = school['区  县'];
+                    var address = school['address'];
+
+                    if (!isNaN(lat) && !isNaN(lng) && level) {
+                        L.circleMarker([lat, lng], {
+                            radius: 5,
+                            fillColor: colors(level).hex(),
+                            color: colors(level).hex(),
+                            weight: 1,
+                            opacity: 0.9,
+                            fillOpacity: 0.6
+                        }).addTo(map)
+                            .bindPopup("<b>" + name + "</b><br>" + district + "<br>" + address);
+                    }
+                });
+            }
+        });
+
+        var legend = L.control({ position: 'bottomleft' });
+
+        legend.onAdd = function (map) {
+            var div = L.DomUtil.create('div', 'legend');
+            div.innerHTML += '<div class="title-container"><h3>Beijing School Map</h3><p>This map shows the distribution of schools that accommodate migrant children in Beijing.</p></div>';
+            var levels = [1, 2, 3, 4, 5];
+
+            for (var i = 0; i < levels.length; i++) {
+                div.innerHTML += '<i style="background:' + colors(levels[i]).hex() + '"></i> ' + labels[levels[i]] + '<br>';
+            }
+
+            return div;
+        };
+
+        legend.addTo(map);
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Test Your Knowledge</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="shortcut icon" href="img/4043250_avatar_child_girl_kid_icon.ico" type="image/x-icon">
+    <!-- Fonts -->
+    <link rel="stylesheet" type="text/css" href="https://fonts.googleapis.com/css?family=Inconsolata" />
+    <link href="https://fonts.googleapis.com/css?family=Catamaran&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Quicksand&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Mukta:300,400,700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Lora:400,400i,500,600,700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Lora', serif;
+            background-color: #f8f9fa;
+            color: #343a40;
+        }
+
+        .navbar-brand img {
+            height: 40px;
+        }
+
+        .section-title {
+            margin-top: 40px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        .card {
+            margin-bottom: 20px;
+        }
+
+        .storytelling {
+            margin-top: 40px;
+        }
+
+        .footer {
+            /* background-color: #fff; */
+
+            color: #343a40;
+            padding: 20px;
+            text-align: center;
+        }
+
+        footer {
+            margin-top: 50px;
+            padding: 20px 0;
+            margin-left: 20%;
+            margin-right: 20%;
+            /* background-color: #f8f9fa; */
+            color: #343a40;
+            text-align: center;
+        }
+
+        .question-container {
+            margin-top: 40px;
+        }
+
+        .feedback {
+            margin-top: 20px;
+        }
+    </style>
+    <!-- Google tag (gtag.js) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-R84F1GN2FV"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag() { dataLayer.push(arguments); }
+        gtag('js', new Date());
+
+        gtag('config', 'G-R84F1GN2FV');
+    </script>
+</head>
+
+<body>
+
+    <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top">
+        <a class="navbar-brand" href="index.html"><img src="img/4043250_avatar_child_girl_kid_icon.png" alt="Logo"></a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ml-auto">
+                <li class="nav-item"><a class="nav-link" href="index.html">Home</a></li>
+                <li class="nav-item"><a class="nav-link" href="perception.html">Public Perception</a></li>
+                <li class="nav-item"><a class="nav-link" href="map.html">Map</a></li>
+                <li class="nav-item"><a class="nav-link" href="survey.html">Survey</a></li>
+                <li class="nav-item"><a class="nav-link" href="pedagogy.html">Pedagogy</a></li>
+                <li class="nav-item"><a class="nav-link active" href="test.html">Test</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container question-container">
+        <h1 class="section-title">Test Your Knowledge</h1>
+        <p class="text-center">This quiz is designed to help you better understand the situation of migrant children in
+            China. Answer each question to the best of your ability. If you answer incorrectly, you will be provided
+            with the correct answer and an explanation to help you learn more. Let's get started!</p>
+        <div id="question-card" class="card">
+            <div class="card-body">
+                <h5 class="card-title" id="question-title"></h5>
+                <div id="answer-buttons" class="btn-group-vertical">
+                    <button class="btn btn-outline-primary" onclick="selectAnswer(this)"></button>
+                    <button class="btn btn-outline-primary" onclick="selectAnswer(this)"></button>
+                    <button class="btn btn-outline-primary" onclick="selectAnswer(this)"></button>
+                    <button class="btn btn-outline-primary" onclick="selectAnswer(this)"></button>
+                </div>
+                <div id="feedback" class="feedback"></div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <p>&copy; 2024 Astoria "Muhan" Wang. All rights reserved.</p>
+        <p><strong>Acknowledgment: </strong>Most of the images used in this application have been sourced from the
+            internet. We sincerely thank the online
+            community for their contributions and support. Additionally, many photos have been taken from
+            schools in Beijing
+            that accept migrant children, collected during my time as a volunteer. Your cooperation and support
+            are greatly
+            appreciated.</p>
+        <a href="https://www.bcis.cn/" target="_blank"><img width="180px" src="img/lecheng.png"
+                style="max-width:20%;"></a>
+    </footer>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const questions = [
+            {
+                question: "What is the primary reason for migration among rural Chinese families?",
+                answers: [
+                    { text: "Employment opportunities", correct: true, explanation: "Many rural Chinese families migrate to urban areas in search of better employment opportunities." },
+                    { text: "Educational opportunities", correct: false, explanation: "While education is important, the primary reason for migration is usually employment." },
+                    { text: "Healthcare access", correct: false, explanation: "Healthcare access is a factor, but not the primary reason for migration among rural Chinese families." },
+                    { text: "Climate change", correct: false, explanation: "Climate change is not a significant factor in rural-urban migration in China." }
+                ]
+            },
+            {
+                question: "How many years of compulsory education are there in China?",
+                answers: [
+                    { text: "9 years", correct: true, explanation: "China has 9 years of compulsory education, from primary school to junior high school." },
+                    { text: "6 years", correct: false, explanation: "6 years is the duration of primary education, not the entire compulsory education period." },
+                    { text: "12 years", correct: false, explanation: "Compulsory education in China is 9 years, although many students continue to high school and beyond." },
+                    { text: "8 years", correct: false, explanation: "China's compulsory education lasts for 9 years." }
+                ]
+            },
+            {
+                question: "What document is essential for children to attend school in a city?",
+                answers: [
+                    { text: "Hukou (household registration)", correct: true, explanation: "The Hukou system is crucial for accessing education and other services in a different city." },
+                    { text: "Passport", correct: false, explanation: "A passport is not necessary for internal migration within China." },
+                    { text: "Driver's license", correct: false, explanation: "A driver's license is not relevant to school admission." },
+                    { text: "Health insurance card", correct: false, explanation: "While important for healthcare, a health insurance card is not essential for school admission." }
+                ]
+            },
+            {
+                question: "Which city has the highest number of migrant children in China?",
+                answers: [
+                    { text: "Beijing", correct: false, explanation: "While Beijing has many migrant children, other cities like Shanghai and Guangzhou have higher numbers." },
+                    { text: "Shanghai", correct: true, explanation: "Shanghai is known to have a significant number of migrant children due to its large population and economic opportunities." },
+                    { text: "Guangzhou", correct: false, explanation: "Guangzhou also has a large number of migrant children but not as many as Shanghai." },
+                    { text: "Shenzhen", correct: false, explanation: "Shenzhen has many migrant children, but Shanghai has the highest number." }
+                ]
+            },
+            {
+                question: "What is the main challenge faced by migrant children in urban schools?",
+                answers: [
+                    { text: "Language barriers", correct: false, explanation: "Language barriers can be a challenge, but the main issue is usually related to the Hukou system." },
+                    { text: "Discrimination", correct: false, explanation: "Migrant children often face discrimination and are sometimes treated differently from local students." },
+                    { text: "Lack of teachers", correct: false, explanation: "While teacher shortages can be an issue, discrimination is a more pervasive problem." },
+                    { text: "All", correct: true, explanation: "All the above are challenges faced by migrant children in a new city." }
+                ]
+            },
+            {
+                question: "What percentage of migrant children complete primary school in urban areas?",
+                answers: [
+                    { text: "70%", correct: true, explanation: "Approximately 70% of migrant children complete primary school in urban areas." },
+                    { text: "50%", correct: false, explanation: "The completion rate is higher than 50%." },
+                    { text: "90%", correct: false, explanation: "The completion rate is lower than 90% due to various challenges faced by migrant children." },
+                    { text: "30%", correct: false, explanation: "The completion rate is higher than 30%." }
+                ]
+            },
+            {
+                question: "Which policy aims to improve the education of migrant children in China?",
+                answers: [
+                    { text: "National Plan for Medium- and Long-term Education Reform and Development", correct: true, explanation: "This plan includes measures to improve the education of migrant children." },
+                    { text: "One-Child Policy", correct: false, explanation: "The One-Child Policy was a population control measure, not related to education." },
+                    { text: "Belt and Road Initiative", correct: false, explanation: "The Belt and Road Initiative focuses on infrastructure and trade, not education." },
+                    { text: "Made in China 2025", correct: false, explanation: "Made in China 2025 is an industrial policy, not an education policy." }
+                ]
+            },
+            {
+                question: "What is a common reason for migrant children to drop out of school?",
+                answers: [
+                    { text: "Economic hardship", correct: true, explanation: "Economic hardship often forces migrant children to drop out of school to support their families." },
+                    { text: "Boredom", correct: false, explanation: "While boredom can be an issue, it is not the primary reason for dropping out." },
+                    { text: "Health issues", correct: false, explanation: "Health issues can cause interruptions, but economic hardship is more common." },
+                    { text: "Lack of interest", correct: false, explanation: "Lack of interest is not the primary reason; economic hardship is more significant." }
+                ]
+            },
+            {
+                question: "How many documents are required for migrant children to enroll public schools?",
+                answers: [
+                    { text: "5", correct: true, explanation: "1.Beijing Emplyment Certificate 2.proof of residency in Beijing 3.Hukou document of entire family 4.Temporary Residency permit in Beijing 5.proof of no guardianship conditions in the place of domicile" },
+                    { text: "3", correct: false },
+                    { text: "2", correct: false },
+                    { text: "6", correct: false }
+                ]
+            },
+            {
+                question: "What is a significant benefit of education for migrant children?",
+                answers: [
+                    { text: "Better job opportunities", correct: true, explanation: "Education provides better job opportunities for migrant children, helping them break the cycle of poverty." },
+                    { text: "Healthier lifestyle", correct: false, explanation: "While education can contribute to a healthier lifestyle, better job opportunities are more significant." },
+                    { text: "More friends", correct: false, explanation: "Having more friends is a benefit, but better job opportunities are the primary advantage." },
+                    { text: "Increased travel", correct: false, explanation: "Increased travel is not a significant benefit of education for migrant children." }
+                ]
+            }
+        ];
+
+        let currentQuestionIndex = 0;
+
+        function startGame() {
+            currentQuestionIndex = 0;
+            showQuestion(questions[currentQuestionIndex]);
+        }
+
+        function showQuestion(question) {
+            const questionTitle = document.getElementById('question-title');
+            questionTitle.innerText = question.question;
+
+            const answerButtons = document.getElementById('answer-buttons');
+            answerButtons.innerHTML = '';
+            question.answers.forEach(answer => {
+                const button = document.createElement('button');
+                button.innerText = answer.text;
+                button.classList.add('btn', 'btn-outline-primary');
+                button.addEventListener('click', () => selectAnswer(button, answer));
+                answerButtons.appendChild(button);
+            });
+
+            const feedback = document.getElementById('feedback');
+            feedback.innerHTML = '';
+        }
+
+        function selectAnswer(button, answer) {
+            const feedback = document.getElementById('feedback');
+            if (answer.correct) {
+                button.classList.add('btn-success');
+                feedback.innerHTML = `<p class="text-success">Correct! ${answer.explanation}</p>`;
+            } else {
+                button.classList.add('btn-danger');
+                feedback.innerHTML = `<p class="text-danger">Incorrect. ${answer.explanation}</p>`;
+            }
+
+            Array.from(button.parentElement.children).forEach(btn => {
+                btn.disabled = true;
+            });
+
+            if (currentQuestionIndex < questions.length - 1) {
+                const nextButton = document.createElement('button');
+                nextButton.innerText = 'Next';
+                nextButton.classList.add('btn', 'btn-primary', 'mt-3');
+                nextButton.addEventListener('click', () => {
+                    currentQuestionIndex++;
+                    showQuestion(questions[currentQuestionIndex]);
+                });
+                feedback.appendChild(nextButton);
+            } else {
+                const restartButton = document.createElement('button');
+                restartButton.innerText = 'Restart';
+                restartButton.classList.add('btn', 'btn-primary', 'mt-3');
+                restartButton.addEventListener('click', startGame);
+                feedback.appendChild(restartButton);
+            }
+        }
+
+        startGame();
+    </script>
+</body>
+
+</html>
